@@ -18,13 +18,35 @@ from string import (
     ascii_letters,  # string of letters
     digits  # string of numbers
 )
+from fastapi.staticfiles import StaticFiles  # serve static files
+from fastapi.middleware.cors import CORSMiddleware  # allow from diff port
 
 
-app = FastAPI()
+# Create FastAPI obj
+app = FastAPI()  
 
+
+# request goes here before endpoints
+app.add_middleware(  
+    CORSMiddleware,  # what middleware
+    allow_origins=["http://localhost:5500"],  # allowed URLs
+    allow_methods=["*"],  # all methods
+    allow_headers=["*"],  # all headers
+)
+
+# how should FastAPI handle "/static"
+app.mount("/static", StaticFiles(directory="src/static"), name="static")
+# app.mount() -> don't pass to API routes
+# "/static" -> path prefix trigger
+# StaticFiles(directory="src/static") -> where to look
+# name="static" -> label
+
+
+# db creation when run
 models.Base.metadata.create_all(bind=engine)  # auto create db
 
 
+# structure for body input
 class ShortyPost(BaseModel):
     long_url: HttpUrl
 
@@ -37,11 +59,9 @@ def generate_code(LENGTH=6):
     return "".join(choices(characters, k=LENGTH))  # join 6 chosen characters
 
 
-
 # --------------
 # ENDPOINTS
 # --------------
-
 
 # Test root
 @app.get("/", status_code=status.HTTP_200_OK)
@@ -54,8 +74,8 @@ def test():
 def get_all_entries(db: Session = Depends(get_db)):
     query = db.query(models.URL)
     entries = query.all()
+    
     return {"entries": entries}
-
 
 
 # Return short code
@@ -74,8 +94,7 @@ def shorten_url(original_url: ShortyPost, db: Session = Depends(get_db)):  # rec
     db.commit()
     db.refresh(entry)
 
-    return {"short code": short_code}
-
+    return {"short_code": short_code}
 
 
 # Redirect to url
@@ -90,6 +109,3 @@ def redirect(short_code: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="code not found")
 
     return RedirectResponse(url=entry.original_url)
-
-
-
