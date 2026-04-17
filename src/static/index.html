@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shorty</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Shorty</h1>
-    <p>URL Shortener</p>
+    <div class="container">
+        <h1>Shorty</h1>
+        <p>URL Shortener</p>
 
+        <input type="text" id="url-input" placeholder="Enter URL here">
+        <button onclick="shortenURL()">Shorten</button>
 
-    <input type="text" id="url-input" placeholder="Enter URL here">
-    <button onclick="shortenURL()">Shorten</button>
-
-    <h5>Short code displayed here:</h5>
-    <div id="result"></div>
-
+        <h5>Short code displayed here:</h5>
+        <div id="result"></div>
+    </div>
     <script src="script.js"></script>  <!--link to js file-->
 </body>
 </html>
