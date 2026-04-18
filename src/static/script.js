@@ -20,6 +20,17 @@ function shortenURL() {
     // .then() -> run when previous step succeeds
     // .catch() -> error exception
     .then(response => response.json()) // read body -> convert to JS obj -> pass to next .then()
+    .then(data => {
+        const result = document.getElementById("result"); // get div
+        const short_code_header = document.getElementById("short-url-header");
+        
+        short_code_header.style.display = "block"
+        result.style.display = "block";  // show div when code is available
+        result.innerText = `${base_url}/${data.short_code}`;  // put code inside div
+    }
+
+
+    )
     .then(data => document.getElementById("result").innerText = data.short_code)  // pass down value
     .catch(error => console.error(error))
 }
