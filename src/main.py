@@ -70,7 +70,7 @@ def test():
 
 
 # Get all entries
-@app.get("/all", status_code=status.HTTP_200_OK)
+@app.get("/api/v1/all", status_code=status.HTTP_200_OK)
 def get_all_entries(db: Session = Depends(get_db)):
     query = db.query(models.URL)
     entries = query.all()
@@ -79,7 +79,7 @@ def get_all_entries(db: Session = Depends(get_db)):
 
 
 # Return short code
-@app.post("/shorten", status_code=status.HTTP_201_CREATED)
+@app.post("/api/v1/shorten", status_code=status.HTTP_201_CREATED)
 def shorten_url(original_url: ShortyPost, db: Session = Depends(get_db)):  # receive long url
     
     short_code = generate_code()  # short code
