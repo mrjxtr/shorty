@@ -31,7 +31,6 @@ function shortenURL() {
 
 
     )
-    .then(data => document.getElementById("result").innerText = data.short_code)  // pass down value
     .catch(error => console.error(error))
 }
 
