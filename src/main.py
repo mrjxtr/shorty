@@ -64,9 +64,9 @@ def generate_code(LENGTH=6):
 # --------------
 
 # Test root
-@app.get("/", status_code=status.HTTP_200_OK)
+@app.get("/ping", status_code=status.HTTP_200_OK)
 def test():
-    return {"message": "connected"}
+    return {"message": "pong"}
 
 
 # Get all entries
