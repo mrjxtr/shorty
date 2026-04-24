@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime  # Datatypes
-from datetime import datetime  # work w/ date/time
+from datetime import datetime, timezone # work w/ date/time
 from database import Base
 
 
@@ -19,6 +19,6 @@ class URL(Base):
     original_url = Column(String, nullable=False)
     # nullable -> can be null
 
-    created_at = Column(DateTime, default=datetime.now)
+    created_at = Column(DateTime, default=datetime.now(timezone.utc))  # use UTC instead of local
     # datetime.now -> current local time
 
