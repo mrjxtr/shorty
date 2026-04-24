@@ -81,6 +81,7 @@ h5 {
     font-size: 14px;
     color: #333333;
     word-break: break-all;
+    margin-bottom: 12px;
 
 }
 
@@ -94,4 +95,28 @@ h5 {
     display: none;
     text-align: left;
     margin-bottom: 10px;
+}
+
+#copy-btn {
+    display: none;
+    margin-bottom: 10px;
+}
+
+
+#empty-error {
+    display: none;
+    color: red;
+    font-size: 12px;
+    text-align: left;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+input.error {
+    border-color: red;
+    outline: none;
+}
+
+input.error:focus {
+    border-color: red;
 }

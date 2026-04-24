@@ -13,14 +13,13 @@
 
         <h5 id="long-url-header">Long URL</h5>
         <input type="text" id="url-input" placeholder="Enter URL here">
+        <span id="empty-error">URL field empty!</span>
         <button onclick="shortenURL()">Shorten Link</button>
 
         <h5 id="short-url-header">Shorty URL</h5>
-        <div id="result">
+        <div id="result"></div>
 
-
-        </div>
-
+        <button id="copy-btn" onclick="copyURL()">Copy</button>
 
     </div>
     <script src="script.js"></script>  <!--link to js file-->

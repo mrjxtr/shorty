@@ -54,7 +54,8 @@ class ShortyPost(BaseModel):
 # --------------
 # UTILS
 # --------------
-def generate_code(LENGTH=6):
+
+def generate_code(LENGTH=6):  # acceptable for small scale
     characters = ascii_letters + digits  # pool of alphanum
     return "".join(choices(characters, k=LENGTH))  # join 6 chosen characters
 
